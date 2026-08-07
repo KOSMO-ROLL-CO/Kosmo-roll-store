@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@theme {
+  --color-kosmo: #FF0082;
+  --color-kosmo-light: #FF3399;
+  --color-kosmo-dark: #CC0068;
+  --color-kosmo-50: #FFF0F6;
+  --color-kosmo-100: #FFE0ED;
+  --color-kosmo-200: #FFC2DB;
+  --color-kosmo-300: #FF99C2;
+  --color-kosmo-400: #FF66A3;
+  --color-kosmo-500: #FF0082;
+  --color-kosmo-600: #CC0068;
+  --color-kosmo-700: #99004E;
+  --color-kosmo-800: #660034;
+  --color-kosmo-900: #33001A;
+
+  --color-cosmos: #0A0A1A;
+  --color-cosmos-light: #1A1A2E;
+  --color-cosmos-medium: #16213E;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-slide-up: slideUp 0.6s ease-out;
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-logo-glow: logoGlow 3s ease-in-out infinite;
+  --animate-spin-slow: spin 12s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px rgba(255, 0, 130, 0.3); }
+  to { box-shadow: 0 0 40px rgba(255, 0, 130, 0.6); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes logoGlow {
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(255, 0, 130, 0.25)); }
+  50% { filter: drop-shadow(0 0 10px rgba(255, 0, 130, 0.6)); }
+}
+
+@keyframes couponGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 0, 130, 0.2), inset 0 0 10px rgba(255, 0, 130, 0.05); }
+  50% { box-shadow: 0 0 20px rgba(255, 0, 130, 0.4), inset 0 0 20px rgba(255, 0, 130, 0.1); }
+}
+
+@keyframes couponPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: #1a1a2e;
+    background-color: #fafafa;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: rgba(255, 0, 130, 0.2);
+    color: #1a1a2e;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fafafa;
+    border-left: 1px solid rgba(10, 10, 26, 0.06);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #FF0082, #7B2FBE);
+    border-radius: 9999px;
+    border: 2px solid #fafafa;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #FF3399, #8B3FD9);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #FF0082 #fafafa;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #FF0082, #7B2FBE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-kosmo-gradient {
+    background: linear-gradient(135deg, #FF0082, #FF3399);
+  }
+
+  .bg-cosmos-gradient {
+    background: linear-gradient(180deg, #0A0A1A 0%, #1A1A2E 100%);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .glass-dark {
+    background: rgba(10, 10, 26, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(255, 0, 130, 0.15);
+  }
+
+  .edition-badge {
+    background: linear-gradient(135deg, #FF0082, #7B2FBE);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    letter-spacing: 0.05em;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
