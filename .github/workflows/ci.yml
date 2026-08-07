@@ -1,0 +1,129 @@
+name: CI/CD Pipeline - Kosmo Roll
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint-and-typecheck:
+    name: 🔍 Lint & Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar Linter (Oxlint)
+        run: npm run lint
+
+      - name: Validação de Tipos TypeScript
+        run: npx tsc --noEmit
+
+  unit-and-integration-tests:
+    name: 🧪 Testes Unitários, Integração & Cobertura
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar Testes & Gerar Coverage
+        run: npm run test:coverage
+
+      - name: Upload de Artefato de Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+
+  security-audit:
+    name: 🛡️ Testes de Segurança & Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Auditoria de Vulnerabilidades de Dependências
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+      - name: Executar Suíte de Segurança (XSS, Sanitização & Masking)
+        run: npm run test:security
+
+  e2e-tests:
+    name: 🎭 Testes End-to-End (Playwright)
+    runs-on: ubuntu-latest
+    needs: [unit-and-integration-tests]
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Instalar Navegadores do Playwright
+        run: npx playwright install --with-deps
+
+      - name: Executar Testes E2E
+        run: npm run test:e2e
+
+      - name: Upload do Relatório HTML do Playwright
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14
+
+  build:
+    name: 🚀 Build de Produção
+    runs-on: ubuntu-latest
+    needs: [lint-and-typecheck, unit-and-integration-tests]
+    steps:
+      - name: Checkout repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Executar Build Vite
+        run: npm run build
