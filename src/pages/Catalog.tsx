@@ -135,6 +135,7 @@ export default function Catalog() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
+                aria-label="Ordenar produtos"
                 className="text-sm text-cosmos/60 bg-transparent border-none focus:ring-0 cursor-pointer"
               >
                 <option value="newest">Mais novos</option>
@@ -149,12 +150,14 @@ export default function Catalog() {
             <div className="hidden sm:flex items-center gap-1 border-l pl-3 border-gray-200">
               <button
                 onClick={() => setGridCols(3)}
+                aria-label="Visualizar em 3 colunas"
                 className={`p-1.5 rounded-lg transition-colors ${gridCols === 3 ? 'bg-kosmo/10 text-kosmo' : 'text-cosmos/30'}`}
               >
                 <Grid3X3 size={16} />
               </button>
               <button
                 onClick={() => setGridCols(2)}
+                aria-label="Visualizar em 2 colunas"
                 className={`p-1.5 rounded-lg transition-colors ${gridCols === 2 ? 'bg-kosmo/10 text-kosmo' : 'text-cosmos/30'}`}
               >
                 <LayoutList size={16} />

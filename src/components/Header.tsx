@@ -162,8 +162,8 @@ export default function Header() {
                 )}
                 <button
                   onClick={logout}
+                  aria-label="Sair"
                   className="flex items-center justify-center w-10 h-10 rounded-full text-cosmos/60 hover:text-kosmo hover:bg-kosmo/5 transition-all"
-                  title="Sair"
                 >
                   <LogOut size={16} />
                 </button>
@@ -180,6 +180,7 @@ export default function Header() {
 
             <button
               onClick={toggleCart}
+              aria-label="Abrir carrinho"
               className="relative flex items-center justify-center w-10 h-10 rounded-full text-cosmos/60 hover:text-kosmo hover:bg-kosmo/5 transition-all"
             >
               <ShoppingBag size={18} />
@@ -200,6 +201,7 @@ export default function Header() {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full text-cosmos/60 hover:text-cosmos hover:bg-kosmo/5 transition-all"
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}

@@ -82,11 +82,20 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             <img
               src={displayImage}
               alt={product.name}
+              loading="lazy"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.8] cursor-zoom-in"
               style={{
                 transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
               }}
-              onError={() => setImageError(true)}
+              onError={(e) => {
+                // Tentar fallback para a primeira imagem principal antes de mostrar placeholder
+                const fallback = product.images[0]
+                if (fallback && e.currentTarget.src !== window.location.origin + fallback) {
+                  e.currentTarget.src = fallback
+                } else {
+                  setImageError(true)
+                }
+              }}
             />
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-kosmo/5 via-purple-100/50 to-kosmo/10 flex items-center justify-center">
@@ -146,6 +155,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               </div>
               <button
                 onClick={handleQuickAdd}
+                aria-label={`Adicionar ${product.name} ao carrinho`}
                 className="w-10 h-10 bg-kosmo text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform"
               >
                 <ShoppingBag size={14} />

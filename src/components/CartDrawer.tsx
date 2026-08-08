@@ -87,6 +87,7 @@ export default function CartDrawer() {
               </div>
               <button
                 onClick={closeCart}
+                aria-label="Fechar carrinho"
                 className="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
               >
                 <X size={18} />
@@ -162,6 +163,7 @@ export default function CartDrawer() {
                             </h4>
                             <button
                               onClick={() => removeItem(item.product.id, item.size, item.color.name)}
+                              aria-label={`Remover ${item.product.name}`}
                               className="text-cosmos/30 hover:text-red-500 transition-colors shrink-0"
                             >
                               <X size={14} />
@@ -183,6 +185,7 @@ export default function CartDrawer() {
                                     item.quantity - 1
                                   )
                                 }
+                                aria-label={`Diminuir quantidade de ${item.product.name}`}
                                 className="w-7 h-7 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
                               >
                                 <Minus size={12} />
@@ -199,6 +202,7 @@ export default function CartDrawer() {
                                     item.quantity + 1
                                   )
                                 }
+                                aria-label={`Aumentar quantidade de ${item.product.name}`}
                                 className="w-7 h-7 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
                               >
                                 <Plus size={12} />

@@ -45,7 +45,7 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Executar Testes & Gerar Coverage
+      - name: Executar Testes & Gerar Coverage (incluindo MSW)
         run: npm run test:coverage
 
       - name: Upload de Artefato de Coverage
@@ -77,8 +77,8 @@ jobs:
       - name: Executar Suíte de Segurança (XSS, Sanitização & Masking)
         run: npm run test:security
 
-  e2e-tests:
-    name: 🎭 Testes End-to-End (Playwright)
+  advanced-e2e-and-quality:
+    name: 🎭 Testes E2E, Acessibilidade & Performance (Playwright & Axe)
     runs-on: ubuntu-latest
     needs: [unit-and-integration-tests]
     steps:
@@ -97,8 +97,17 @@ jobs:
       - name: Instalar Navegadores do Playwright
         run: npx playwright install --with-deps
 
-      - name: Executar Testes E2E
+      - name: Executar Testes E2E de Fluxo
         run: npm run test:e2e
+
+      - name: Executar Testes de Acessibilidade (a11y)
+        run: npm run test:a11y
+
+      - name: Executar Testes de Performance & Web Vitals
+        run: npm run test:perf
+
+      - name: Executar Testes de Estresse & Memória
+        run: npm run test:stress
 
       - name: Upload do Relatório HTML do Playwright
         if: always()

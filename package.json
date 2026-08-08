@@ -14,7 +14,12 @@
     "test:ui": "vitest --ui",
     "test:e2e": "playwright test",
     "test:security": "vitest run src/tests/security",
-    "test:exploratory": "playwright test e2e/exploratory.spec.ts"
+    "test:exploratory": "playwright test e2e/exploratory.spec.ts",
+    "test:a11y": "playwright test e2e/accessibility.spec.ts",
+    "test:visual": "playwright test e2e/visual-regression.spec.ts",
+    "test:perf": "playwright test e2e/performance-web-vitals.spec.ts",
+    "test:stress": "playwright test e2e/stress-memory.spec.ts",
+    "test:images": "playwright test e2e/product-images.spec.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -26,6 +31,7 @@
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@playwright/test": "^1.62.1",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
@@ -36,6 +42,7 @@
     "@vitejs/plugin-react": "^6.0.4",
     "@vitest/coverage-v8": "^4.1.10",
     "jsdom": "^29.1.1",
+    "msw": "^2.15.0",
     "oxlint": "^1.75.0",
     "sharp": "^0.35.3",
     "typescript": "~6.0.2",

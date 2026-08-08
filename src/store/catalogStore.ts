@@ -22,7 +22,36 @@ function load(): Product[] {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) return parsed as Product[];
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.map((p: Product) => {
+          const seed = seedProducts.find((s) => s.id === p.id);
+
+          // Restaurar imagens principais do seed se estiverem ausentes/vazias no cache
+          const validImages =
+            p.images && p.images.length > 0 && p.images[0]
+              ? p.images
+              : (seed?.images ?? []);
+
+          // Restaurar colorImages do seed se estiverem ausentes no cache
+          const validColorImages =
+            p.colorImages && Object.keys(p.colorImages).length > 0
+              ? p.colorImages
+              : seed?.colorImages;
+
+          // Restaurar lifestyleImages do seed se estiverem ausentes no cache
+          const validLifestyleImages =
+            p.lifestyleImages && p.lifestyleImages.length > 0
+              ? p.lifestyleImages
+              : seed?.lifestyleImages;
+
+          return {
+            ...p,
+            images: validImages,
+            colorImages: validColorImages,
+            lifestyleImages: validLifestyleImages,
+          };
+        });
+      }
     }
   } catch {
     // fallback to seed
