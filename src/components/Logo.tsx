@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { assetUrl } from '../utils/asset';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -15,7 +16,7 @@ const sizeMap = {
 export default function Logo({ size = 'md', className = '' }: LogoProps) {
   return (
     <motion.img
-      src="/kosmo-roll-logo.svg"
+      src={assetUrl('/kosmo-roll-logo.svg')}
       alt="Kosmo Roll"
       className={`${sizeMap[size]} animate-logo-glow ${className}`}
       initial={{ opacity: 0, scale: 0.7, rotate: -8 }}

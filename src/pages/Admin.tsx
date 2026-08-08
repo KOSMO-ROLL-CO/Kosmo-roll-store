@@ -57,6 +57,7 @@ import {
 import { getWaitlistEmails, getRestockAlerts } from '../utils/waitlist';
 import { CATEGORIES, type Product, type Size, type ProductColor } from '../types';
 import Logo from '../components/Logo';
+import { assetUrl } from '../utils/asset';
 
 type AdminTab = 'dashboard' | 'produtos' | 'timers' | 'pedidos' | 'cupons' | 'waitlist';
 
@@ -578,7 +579,7 @@ function ProductsTab() {
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <div className="w-11 h-13 rounded-lg overflow-hidden bg-gray-100 shrink-0" style={{ height: '52px', width: '44px' }}>
-                        <img src={p.images[0]} alt="" className="w-full h-full object-cover" />
+                        <img src={assetUrl(p.images[0])} alt="" className="w-full h-full object-cover" />
                       </div>
                       <div className="min-w-0">
                         <Link to={`/produto/${p.slug}`} className="font-semibold text-cosmos hover:text-kosmo truncate block max-w-[220px]">{p.name}</Link>
@@ -661,7 +662,7 @@ function TimersTab() {
         {products.map((p) => (
           <div key={p.id} className="bg-white rounded-2xl border border-gray-100 p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div className="w-12 h-14 rounded-lg overflow-hidden bg-gray-100 shrink-0">
-              <img src={p.images[0]} alt="" className="w-full h-full object-cover" />
+              <img src={assetUrl(p.images[0])} alt="" className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-cosmos truncate">{p.name}</p>

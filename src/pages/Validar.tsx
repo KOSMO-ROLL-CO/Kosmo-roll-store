@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Fingerprint, ShieldCheck, CheckCircle2, XCircle, ArrowLeft, Search } from 'lucide-react';
 import { useCatalog, getSoldOutProducts } from '../store/catalogStore';
+import { assetUrl } from '../utils/asset';
 
 const EXAMPLES = [38, 22, 120];
 
@@ -121,7 +122,7 @@ export default function Validar() {
                 <div className="flex items-center gap-4 mb-5">
                   <div className="w-16 h-20 rounded-xl overflow-hidden bg-gradient-to-br from-kosmo/5 to-purple-100 shrink-0">
                     <img
-                      src={found.images[0]}
+                      src={assetUrl(found.images[0])}
                       alt={found.name}
                       className="w-full h-full object-cover"
                     />

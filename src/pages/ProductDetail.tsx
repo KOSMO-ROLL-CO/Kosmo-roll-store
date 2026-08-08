@@ -10,6 +10,7 @@ import { formatInstallment } from '../utils/commerce';
 import ProductCard from '../components/ProductCard';
 import CountdownTimer from '../components/CountdownTimer';
 import Logo from '../components/Logo';
+import { assetUrl } from '../utils/asset';
 import type { Size, ProductColor } from '../types';
 
 export default function ProductDetail() {
@@ -66,8 +67,8 @@ export default function ProductDetail() {
   const userCanReview = user ? canReview(product.id, user.name, user.email) : false;
 
   const currentImages = selectedColor?.name && product.colorImages?.[selectedColor.name]
-    ? product.colorImages[selectedColor.name]
-    : product.images;
+    ? product.colorImages[selectedColor.name].map(assetUrl)
+    : product.images.map(assetUrl);
 
   const thumbLabels = currentImages.map((_, i) => {
     if (i === 0) return 'Frente';
@@ -146,7 +147,7 @@ export default function ProductDetail() {
                   className="absolute inset-0 w-full h-full object-cover"
                   onError={(e) => {
                     // Tentar fallback para a primeira imagem principal antes do placeholder
-                    const fallback = product.images[0]
+                    const fallback = assetUrl(product.images[0])
                     if (fallback && e.currentTarget.src !== window.location.origin + fallback) {
                       e.currentTarget.src = fallback
                     } else {
@@ -603,7 +604,7 @@ export default function ProductDetail() {
                   }`}
                 >
                   <img
-                    src={img.src}
+                    src={assetUrl(img.src)}
                     alt={`${product.name} - ${img.label}`}
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />

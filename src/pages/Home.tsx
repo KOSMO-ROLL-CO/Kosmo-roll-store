@@ -9,6 +9,7 @@ import ProductCard from '../components/ProductCard';
 import Reveal from '../components/Reveal';
 import Logo from '../components/Logo';
 import CountdownTimer from '../components/CountdownTimer';
+import { assetUrl } from '../utils/asset';
 
 const heroStats = [
   { icon: Sparkles, value: 'Estampado', label: 'Sob demanda' },
@@ -55,7 +56,7 @@ function LimitedEditionCard({ product, index }: { product: Product; index: numbe
         >
           {image && !imageError ? (
             <img
-              src={image}
+              src={assetUrl(image)}
               alt={product.name}
               className="w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.8]"
               style={{
@@ -130,7 +131,7 @@ export default function Home() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover opacity-45"
           >
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+            <source src={assetUrl('/videos/hero-bg.mp4')} type="video/mp4" />
           </video>
           {/* White vignette overlay */}
           <div

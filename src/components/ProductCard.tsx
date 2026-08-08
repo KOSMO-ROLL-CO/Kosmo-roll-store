@@ -8,6 +8,7 @@ import { formatInstallment } from '../utils/commerce';
 import type { Product, ProductColor } from '../types';
 import Logo from './Logo';
 import CountdownTimer from './CountdownTimer';
+import { assetUrl } from '../utils/asset';
 
 interface ProductCardProps {
   product: Product;
@@ -54,8 +55,8 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   };
 
   const displayImage = hoveredColor && product.colorImages?.[hoveredColor]
-    ? product.colorImages[hoveredColor][0]
-    : product.images[0];
+    ? assetUrl(product.colorImages[hoveredColor][0])
+    : assetUrl(product.images[0]);
 
   const editionPercentage = (product.edition.current / product.edition.total) * 100;
   const editionRemaining = product.edition.total - product.edition.current;
@@ -89,7 +90,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               }}
               onError={(e) => {
                 // Tentar fallback para a primeira imagem principal antes de mostrar placeholder
-                const fallback = product.images[0]
+                const fallback = assetUrl(product.images[0])
                 if (fallback && e.currentTarget.src !== window.location.origin + fallback) {
                   e.currentTarget.src = fallback
                 } else {

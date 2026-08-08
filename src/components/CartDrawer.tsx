@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import { useKosmo } from '../context/KosmoContext';
 import { formatCurrency, formatCEP, FREE_SHIPPING_THRESHOLD } from '../utils/commerce';
+import { assetUrl } from '../utils/asset';
 
 export default function CartDrawer() {
   const {
@@ -150,7 +151,7 @@ export default function CartDrawer() {
                       >
                         <div className="w-20 h-24 rounded-lg bg-gradient-to-br from-kosmo/5 to-purple-100 overflow-hidden shrink-0">
                           <img
-                            src={item.product.colorImages?.[item.color.name]?.[0] ?? item.product.images[0]}
+                            src={assetUrl(item.product.colorImages?.[item.color.name]?.[0] ?? item.product.images[0])}
                             alt={item.product.name}
                             className="w-full h-full object-cover"
                           />
