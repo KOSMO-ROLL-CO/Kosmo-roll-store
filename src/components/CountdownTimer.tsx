@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 interface CountdownTimerProps {
   endDate?: string;
   size?: 'sm' | 'md' | 'lg';
+  variant?: 'light' | 'dark';
   fallbackDays?: number;
   onEnded?: () => void;
 }
@@ -36,7 +37,13 @@ function getTimeLeft(target: number): TimeLeft {
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-export default function CountdownTimer({ endDate, size = 'md', fallbackDays = 5, onEnded }: CountdownTimerProps) {
+export default function CountdownTimer({
+  endDate,
+  size = 'md',
+  variant = 'light',
+  fallbackDays = 5,
+  onEnded,
+}: CountdownTimerProps) {
   const [target] = useState(() => getEndTimestamp(endDate, fallbackDays));
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => getTimeLeft(target));
 
@@ -49,16 +56,15 @@ export default function CountdownTimer({ endDate, size = 'md', fallbackDays = 5,
     return () => clearInterval(interval);
   }, [target, onEnded]);
 
-  const boxClass =
-    size === 'sm'
-      ? 'min-w-[26px] px-1 py-0.5'
-      : size === 'lg'
-      ? 'min-w-[56px] px-3 py-2.5'
-      : 'min-w-[44px] px-2 py-1.5';
-
-  const valueClass = size === 'sm' ? 'text-[11px]' : size === 'lg' ? 'text-2xl' : 'text-lg';
+  const valueClass = size === 'sm' ? 'text-[13px]' : size === 'lg' ? 'text-3xl' : 'text-xl';
   const labelClass = size === 'sm' ? 'text-[7px]' : size === 'lg' ? 'text-xs' : 'text-[10px]';
-  const gapClass = size === 'sm' ? 'gap-1' : 'gap-1.5';
+  const gapClass = size === 'sm' ? 'gap-1' : size === 'lg' ? 'gap-2' : 'gap-1.5';
+
+  const dark = variant === 'dark';
+  const digitClass = dark
+    ? 'text-kosmo [text-shadow:0_0_10px_rgba(255,0,130,0.55)]'
+    : 'text-kosmo-600 [text-shadow:0_0_6px_rgba(204,0,104,0.2)]';
+  const labelColor = dark ? 'text-white/50' : 'text-cosmos/60';
 
   const units = [
     { value: timeLeft.days, label: 'dias' },
@@ -69,24 +75,26 @@ export default function CountdownTimer({ endDate, size = 'md', fallbackDays = 5,
 
   if (timeLeft.done) {
     return (
-      <span className={`inline-flex items-center gap-1.5 font-semibold ${valueClass} text-kosmo`}>
+      <span className={`inline-flex items-center gap-1 font-arcade ${valueClass} ${digitClass}`}>
         Edição encerrada
       </span>
     );
   }
 
   return (
-    <div className={`flex flex-wrap items-center ${gapClass}`}>
+    <div className={`flex flex-wrap items-baseline ${gapClass}`}>
       {units.map((unit, i) => (
-        <div key={unit.label} className={`flex items-center ${gapClass}`}>
-          <div
-            className={`${boxClass} rounded-lg bg-cosmos text-white flex flex-col items-center justify-center leading-none shadow-md shadow-kosmo/10`}
-          >
-            <span className={`font-display font-bold ${valueClass} tabular-nums`}>{pad(unit.value)}</span>
-            <span className={`${labelClass} text-white/50 font-medium uppercase tracking-wider mt-0.5`}>{unit.label}</span>
+        <Fragment key={unit.label}>
+          <div className="flex flex-col items-center leading-none">
+            <span className={`font-arcade ${valueClass} ${digitClass} leading-none`}>{pad(unit.value)}</span>
+            <span className={`${labelClass} ${labelColor} font-body font-medium uppercase tracking-wider mt-0.5 leading-none`}>
+              {unit.label}
+            </span>
           </div>
-          {i < units.length - 1 && <span className={`font-display font-bold text-kosmo ${valueClass}`}>:</span>}
-        </div>
+          {i < units.length - 1 && (
+            <span className={`font-arcade ${valueClass} ${digitClass} leading-none animate-pulse`}>:</span>
+          )}
+        </Fragment>
       ))}
     </div>
   );

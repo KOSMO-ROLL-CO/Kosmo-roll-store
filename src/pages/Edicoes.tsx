@@ -120,7 +120,7 @@ export default function Edicoes() {
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-2 flex items-center gap-1.5">
                     <Clock size={12} /> Abertura em
                   </p>
-                  <CountdownTimer endDate="2026-08-20T12:00:00-03:00" size="lg" />
+                  <CountdownTimer endDate="2026-08-20T12:00:00-03:00" size="lg" variant="dark" />
                 </div>
 
                 <form onSubmit={handleWaitlist} className="space-y-3 max-w-md">

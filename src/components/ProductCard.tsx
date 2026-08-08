@@ -226,7 +226,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                 />
               </div>
               <div className="pt-0.5">
-                <CountdownTimer endDate={product.saleEndsAt} size="sm" />
+                <CountdownTimer endDate={product.saleEndsAt} size="sm" variant="light" />
               </div>
             </div>
           )}
