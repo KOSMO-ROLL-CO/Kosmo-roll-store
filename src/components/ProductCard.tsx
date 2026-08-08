@@ -26,7 +26,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
 
   const handleZoomMove = (e: React.MouseEvent) => {
     const rect = imageRef.current?.getBoundingClientRect();
-    if (!rect) return;
+    if (!rect || rect.width === 0 || rect.height === 0) return;
     const x = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
     const y = Math.min(100, Math.max(0, ((e.clientY - rect.top) / rect.height) * 100));
     setZoomPos({ x, y });
@@ -192,7 +192,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
             </h3>
           </div>
 
-          <p className="text-sm text-cosmos/50 line-clamp-1">
+          <p className="text-sm text-cosmos/60 line-clamp-1">
             {product.shortDescription}
           </p>
 
@@ -201,21 +201,21 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               R$ {product.price.toFixed(2).replace('.', ',')}
             </span>
             {product.originalPrice && (
-              <span className="text-sm text-cosmos/40 line-through">
+              <span className="text-sm text-cosmos/60 line-through">
                 R$ {product.originalPrice.toFixed(2).replace('.', ',')}
               </span>
             )}
           </div>
-          <p className="text-xs text-cosmos/40">
+          <p className="text-xs text-cosmos/60">
             ou {formatInstallment(product.price)} sem juros
           </p>
 
           {/* Edition progress */}
           {product.edition.isLimited && (
             <div className="space-y-1.5">
-              <div className="flex justify-between text-xs text-cosmos/50">
+              <div className="flex justify-between text-xs text-cosmos/60">
                 <span>Edição #{product.edition.current}/{product.edition.total}</span>
-                <span className="text-kosmo font-medium">
+                <span className="text-kosmo-600 font-medium">
                   {editionRemaining} restantes
                 </span>
               </div>
@@ -259,7 +259,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                     title={color.name}
                   />
                   <span className={`text-[10px] transition-colors ${
-                    hoveredColor === color.name ? 'text-kosmo font-medium' : 'text-cosmos/40'
+                    hoveredColor === color.name ? 'text-kosmo-600 font-medium' : 'text-cosmos/60'
                   }`}>
                     {color.name}
                   </span>

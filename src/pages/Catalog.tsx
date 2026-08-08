@@ -91,7 +91,7 @@ export default function Catalog() {
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-cosmos mb-4">
               Catálogo
             </h1>
-            <p className="text-cosmos/50 max-w-lg mx-auto">
+            <p className="text-cosmos/60 max-w-lg mx-auto">
               Explore todas as peças da Kosmo Roll. Do básico ao exclusivo.
             </p>
           </motion.div>
@@ -107,7 +107,7 @@ export default function Catalog() {
               onClick={() => handleCategoryChange('all')}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 selectedCategory === 'all'
-                  ? 'bg-kosmo text-white shadow-lg shadow-kosmo/25'
+                  ? 'bg-kosmo-600 text-white shadow-lg shadow-kosmo/25'
                   : 'bg-gray-100 text-cosmos/60 hover:bg-gray-200'
               }`}
             >
@@ -119,7 +119,7 @@ export default function Catalog() {
                 onClick={() => handleCategoryChange(cat.id)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   selectedCategory === cat.id
-                    ? 'bg-kosmo text-white shadow-lg shadow-kosmo/25'
+                    ? 'bg-kosmo-600 text-white shadow-lg shadow-kosmo/25'
                     : 'bg-gray-100 text-cosmos/60 hover:bg-gray-200'
                 }`}
               >
@@ -167,7 +167,7 @@ export default function Catalog() {
         </div>
 
         {/* Results count */}
-        <p className="text-sm text-cosmos/40 mb-6">
+        <p className="text-sm text-cosmos/60 mb-6">
           {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'} encontrado{filteredProducts.length !== 1 ? 's' : ''}
           {query && (
             <>

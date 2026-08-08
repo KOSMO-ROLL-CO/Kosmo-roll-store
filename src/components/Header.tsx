@@ -95,7 +95,7 @@ export default function Header() {
               <span className="font-display text-xl font-bold tracking-wider text-cosmos">
                 KOSMO ROLL
               </span>
-              <span className="text-[0.6rem] font-medium tracking-[0.3em] text-kosmo">
+              <span className="text-[0.6rem] font-medium tracking-[0.3em] text-kosmo-600">
                 \ CO.
               </span>
             </div>
@@ -109,7 +109,7 @@ export default function Header() {
                 to={link.to}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.to
-                    ? 'bg-kosmo text-white shadow-lg shadow-kosmo/25'
+                    ? 'bg-kosmo-600 text-white shadow-lg shadow-kosmo/25'
                     : 'text-cosmos/70 hover:text-cosmos hover:bg-kosmo/5'
                 }`}
               >
@@ -172,7 +172,7 @@ export default function Header() {
             ) : (
               <Link
                 to="/login"
-                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-kosmo text-white text-sm font-medium hover:bg-kosmo-dark transition-all shadow-lg shadow-kosmo/25"
+                className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full bg-kosmo-600 text-white text-sm font-medium hover:bg-kosmo-700 transition-all shadow-lg shadow-kosmo/25"
               >
                 <User size={16} />
                 <span className="hidden lg:inline">Entrar</span>

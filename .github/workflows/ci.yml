@@ -77,6 +77,14 @@ jobs:
       - name: Executar Suíte de Segurança (XSS, Sanitização & Masking)
         run: npm run test:security
 
+      - name: Verificação de Segredos no Repositório (Gitleaks)
+        env:
+          GITLEAKS_VERSION: 8.30.1
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" | tar -xz gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks detect --source . --no-banner --redact
+
   advanced-e2e-and-quality:
     name: 🎭 Testes E2E, Acessibilidade & Performance (Playwright & Axe)
     runs-on: ubuntu-latest
@@ -103,11 +111,21 @@ jobs:
       - name: Executar Testes de Acessibilidade (a11y)
         run: npm run test:a11y
 
+      - name: Executar Testes de Layout Responsivo
+        run: npm run test:responsive
+
       - name: Executar Testes de Performance & Web Vitals
         run: npm run test:perf
 
       - name: Executar Testes de Estresse & Memória
         run: npm run test:stress
+
+      - name: Executar Smoke Test do Build de Produção
+        env:
+          KOSMO_BASE_PATH: /Kosmo-roll-store/
+        run: |
+          npm run build
+          npx playwright test --config=playwright.prod.config.ts
 
       - name: Upload do Relatório HTML do Playwright
         if: always()

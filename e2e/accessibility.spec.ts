@@ -8,7 +8,6 @@ test.describe('Testes de Acessibilidade (WCAG 2.1 AA)', () => {
 
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .disableRules(['color-contrast']) // Permite personalização do tema cósmico escuro
       .analyze()
 
     expect(accessibilityScanResults.violations).toEqual([])
@@ -20,7 +19,6 @@ test.describe('Testes de Acessibilidade (WCAG 2.1 AA)', () => {
 
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa'])
-      .disableRules(['color-contrast'])
       .analyze()
 
     expect(accessibilityScanResults.violations).toEqual([])
@@ -32,7 +30,6 @@ test.describe('Testes de Acessibilidade (WCAG 2.1 AA)', () => {
 
     const accessibilityScanResults = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa'])
-      .disableRules(['color-contrast'])
       .analyze()
 
     expect(accessibilityScanResults.violations).toEqual([])
