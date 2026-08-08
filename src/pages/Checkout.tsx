@@ -29,6 +29,7 @@ import Logo from '../components/Logo';
 import CreditCardDisplay from '../components/CreditCardDisplay';
 import { COUPON_INFO, getCouponInfo, type CouponInfo } from '../utils/commerce';
 import { detectCardBrand, formatCardNumber as formatCard, formatExpiry as formatExp, luhnCheck, BRAND_INFO, type CardBrand } from '../utils/cardValidation';
+import { assetUrl } from '../utils/asset';
 
 type CheckoutStep = 'info' | 'payment' | 'confirmation';
 type PaymentMethod = 'pix' | 'card' | 'boleto';
@@ -1025,7 +1026,7 @@ export default function Checkout() {
                     {suggestions.map((s) => (
                       <div key={s.id} className="flex items-center gap-3 p-2.5 rounded-xl bg-gray-50 border border-gray-100">
                         <div className="w-12 h-14 rounded-lg overflow-hidden shrink-0 bg-gradient-to-br from-kosmo/10 to-purple-100">
-                          <img src={s.images[0]} alt={s.name} className="w-full h-full object-cover" />
+                          <img src={assetUrl(s.images[0])} alt={s.name} className="w-full h-full object-cover" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <h5 className="text-sm font-semibold text-cosmos truncate">{s.name}</h5>

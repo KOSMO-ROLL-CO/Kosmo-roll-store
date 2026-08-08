@@ -5,6 +5,7 @@ import { CheckCircle2, Mail, Rocket, Sparkles, BadgeCheck } from 'lucide-react';
 import { soldOutProducts } from '../data/products';
 import { joinRestockAlert } from '../utils/waitlist';
 import Logo from '../components/Logo';
+import { assetUrl } from '../utils/asset';
 import type { Product } from '../types';
 
 function SoldOutCard({ product, index }: { product: Product; index: number }) {
@@ -29,7 +30,7 @@ function SoldOutCard({ product, index }: { product: Product; index: number }) {
     >
       <div className="relative overflow-hidden rounded-2xl bg-gray-100 aspect-[3/4] mb-4">
         <img
-          src={product.images[0]}
+          src={assetUrl(product.images[0])}
           alt={product.name}
           className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[30%] group-hover:opacity-80 group-hover:scale-105 transition-all duration-500"
         />

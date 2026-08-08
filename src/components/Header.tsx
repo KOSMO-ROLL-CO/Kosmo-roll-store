@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCatalog } from '../store/catalogStore';
 import Logo from './Logo';
 import { motion, AnimatePresence } from 'framer-motion';
+import { assetUrl } from '../utils/asset';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -265,7 +266,7 @@ export default function Header() {
                           >
                             <div className="w-12 h-14 rounded-lg bg-gradient-to-br from-kosmo/10 to-purple-100 overflow-hidden shrink-0">
                               <img
-                                src={p.images[0]}
+                                src={assetUrl(p.images[0])}
                                 alt={p.name}
                                 className="w-full h-full object-cover"
                               />
