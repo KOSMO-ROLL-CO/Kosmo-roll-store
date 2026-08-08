@@ -78,9 +78,12 @@ jobs:
         run: npm run test:security
 
       - name: Verificação de Segredos no Repositório (Gitleaks)
-        uses: gitleaks/gitleaks-action@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_VERSION: 8.30.1
+        run: |
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" | tar -xz gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+          gitleaks detect --source . --no-banner --redact
 
   advanced-e2e-and-quality:
     name: 🎭 Testes E2E, Acessibilidade & Performance (Playwright & Axe)
