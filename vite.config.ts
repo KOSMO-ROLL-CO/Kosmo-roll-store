@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: process.env.GITHUB_ACTIONS ? '/Kosmo-roll-store/' : '/',
+  base: process.env.KOSMO_BASE_PATH ?? '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
