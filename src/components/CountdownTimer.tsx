@@ -51,13 +51,14 @@ export default function CountdownTimer({ endDate, size = 'md', fallbackDays = 5,
 
   const boxClass =
     size === 'sm'
-      ? 'min-w-[34px] px-1.5 py-1'
+      ? 'min-w-[26px] px-1 py-0.5'
       : size === 'lg'
       ? 'min-w-[56px] px-3 py-2.5'
       : 'min-w-[44px] px-2 py-1.5';
 
-  const valueClass = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-2xl' : 'text-lg';
-  const labelClass = size === 'sm' ? 'text-[8px]' : size === 'lg' ? 'text-xs' : 'text-[10px]';
+  const valueClass = size === 'sm' ? 'text-[11px]' : size === 'lg' ? 'text-2xl' : 'text-lg';
+  const labelClass = size === 'sm' ? 'text-[7px]' : size === 'lg' ? 'text-xs' : 'text-[10px]';
+  const gapClass = size === 'sm' ? 'gap-1' : 'gap-1.5';
 
   const units = [
     { value: timeLeft.days, label: 'dias' },
@@ -75,9 +76,9 @@ export default function CountdownTimer({ endDate, size = 'md', fallbackDays = 5,
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-1.5">
+    <div className={`flex flex-wrap items-center ${gapClass}`}>
       {units.map((unit, i) => (
-        <div key={unit.label} className="flex items-center gap-1.5">
+        <div key={unit.label} className={`flex items-center ${gapClass}`}>
           <div
             className={`${boxClass} rounded-lg bg-cosmos text-white flex flex-col items-center justify-center leading-none shadow-md shadow-kosmo/10`}
           >

@@ -1,5 +1,13 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type Page } from '@playwright/test'
 import path from 'node:path'
+
+async function waitForIdle(page: Page) {
+  try {
+    await page.waitForLoadState('networkidle', { timeout: 10000 })
+  } catch {
+    // Segue mesmo que vídeos/imagens mantenham a rede ativa sob execução paralela
+  }
+}
 
 const VIEWPORTS = [
   { width: 320, height: 568, label: 'iPhone SE (320px)' },
@@ -30,7 +38,7 @@ for (const vp of VIEWPORTS) {
     test(`${vp.width}x${vp.height} — ${route.name} sem overflow horizontal`, async ({ page }) => {
       await page.setViewportSize({ width: vp.width, height: vp.height })
       await page.goto(route.path, { waitUntil: 'domcontentloaded' })
-      await page.waitForLoadState('networkidle')
+      await waitForIdle(page)
 
       const overflow = await page.evaluate(() => {
         const doc = document.documentElement
@@ -46,7 +54,7 @@ for (const vp of VIEWPORTS) {
 
       await page.screenshot({
         path: path.join(SHOT_DIR, `${vp.width}x${vp.height}-${route.name}.png`),
-        fullPage: true,
+        timeout: 15000,
       })
     })
   }
@@ -56,7 +64,7 @@ test.describe('Menu mobile', () => {
   test('abre o menu hambúrguer e mostra a navegação em 375px', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
     await page.goto('/', { waitUntil: 'domcontentloaded' })
-    await page.waitForLoadState('networkidle')
+    await waitForIdle(page)
 
     const menuBtn = page.getByRole('button', { name: 'Abrir menu' })
     await expect(menuBtn).toBeVisible()
@@ -73,7 +81,7 @@ test.describe('Menu mobile', () => {
   test('esconde a navegação desktop e mostra o botão do carrinho em 375px', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 })
     await page.goto('/', { waitUntil: 'domcontentloaded' })
-    await page.waitForLoadState('networkidle')
+    await waitForIdle(page)
 
     const desktopNavLink = page.getByRole('navigation').first().getByRole('link', { name: 'Contato' })
     await expect(desktopNavLink).toBeHidden()
