@@ -152,10 +152,10 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4"
         >
-          <p className="text-white/40 text-xs">
-            © 2026 KOSMO ROLL® \ CO. Todos os direitos reservados.
+          <p className="text-white/50 text-xs">
+            © {new Date().getFullYear()} KOSMO ROLL™ \ CO. Todos os direitos reservados.
           </p>
-          <p className="text-white/40 text-xs flex items-center gap-1">
+          <p className="text-white/50 text-xs flex items-center gap-1">
             Feito por{' '}
             <a
               href="https://capybaraholding.com.br"

@@ -75,7 +75,7 @@ export default function CountdownTimer({ endDate, size = 'md', fallbackDays = 5,
   }
 
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex flex-wrap items-center gap-1.5">
       {units.map((unit, i) => (
         <div key={unit.label} className="flex items-center gap-1.5">
           <div

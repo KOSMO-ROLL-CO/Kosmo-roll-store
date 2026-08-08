@@ -102,7 +102,7 @@ function LimitedEditionCard({ product, index }: { product: Product; index: numbe
           />
         </div>
 
-        <div className="flex items-center justify-between text-[10px] text-white/40">
+        <div className="flex items-center justify-between text-[10px] text-white/50">
           <span>Edição #{product.edition.current}/{product.edition.total}</span>
           <CountdownTimer endDate={product.saleEndsAt} size="sm" />
         </div>
@@ -175,7 +175,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kosmo/5 border border-kosmo/10 text-kosmo text-sm font-medium mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kosmo/5 border border-kosmo/10 text-kosmo-600 text-sm font-medium mb-8"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-kosmo opacity-75" />
@@ -215,7 +215,7 @@ export default function Home() {
             >
               <Link
                 to="/catalogo"
-                className="px-8 py-4 bg-kosmo text-white rounded-full font-semibold text-sm flex items-center gap-2 hover:bg-kosmo-dark transition-all duration-300 shadow-xl shadow-kosmo/25 hover:shadow-2xl hover:shadow-kosmo/30 hover:scale-105"
+                className="px-8 py-4 bg-kosmo-600 text-white rounded-full font-semibold text-sm flex items-center gap-2 hover:bg-kosmo-700 transition-all duration-300 shadow-xl shadow-kosmo/25 hover:shadow-2xl hover:shadow-kosmo/30 hover:scale-105"
               >
                 Explorar Catálogo
                 <ArrowRight size={16} />
@@ -253,7 +253,7 @@ export default function Home() {
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-cosmos mb-4">
             Explore o Universo
           </h2>
-          <p className="text-cosmos/50 max-w-lg mx-auto">
+          <p className="text-cosmos/60 max-w-lg mx-auto">
             Cada peça é uma estrela no nosso catálogo. Encontre a sua constelação.
           </p>
         </Reveal>
@@ -271,7 +271,7 @@ export default function Home() {
                 <h3 className="font-display font-semibold text-cosmos text-sm mb-1">
                   {category.name}
                 </h3>
-                <p className="text-xs text-cosmos/40">{category.description}</p>
+                <p className="text-xs text-cosmos/60">{category.description}</p>
               </Link>
             </Reveal>
           ))}
@@ -283,7 +283,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <Reveal className="flex items-end justify-between mb-12">
             <div>
-              <span className="text-kosmo text-sm font-semibold tracking-wider uppercase">Destaques</span>
+              <span className="text-kosmo-600 text-sm font-semibold tracking-wider uppercase">Destaques</span>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-cosmos mt-2">
                 Em Órbita Agora
               </h2>
@@ -323,7 +323,7 @@ export default function Home() {
 
             <div className="relative grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <span className="inline-block px-3 py-1 rounded-full bg-kosmo/20 text-kosmo text-xs font-bold tracking-wider uppercase mb-6">
+                <span className="inline-block px-3 py-1 rounded-full bg-kosmo/20 text-kosmo-300 text-xs font-bold tracking-wider uppercase mb-6">
                   ⚡ Edições Numeradas
                 </span>
                 <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
@@ -337,7 +337,7 @@ export default function Home() {
                 </p>
                 <Link
                   to="/edicoes"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-kosmo text-white rounded-full font-semibold hover:bg-kosmo-light transition-all duration-300 shadow-xl shadow-kosmo/25 hover:scale-105"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-kosmo-600 text-white rounded-full font-semibold hover:bg-kosmo-700 transition-all duration-300 shadow-xl shadow-kosmo/25 hover:scale-105"
                 >
                   Ver Edições <ArrowRight size={16} />
                 </Link>
@@ -359,7 +359,7 @@ export default function Home() {
         <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50/50">
           <div className="max-w-7xl mx-auto">
             <Reveal className="text-center mb-16">
-              <span className="text-kosmo text-sm font-semibold tracking-wider uppercase">Acabou de chegar</span>
+              <span className="text-kosmo-600 text-sm font-semibold tracking-wider uppercase">Acabou de chegar</span>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-cosmos mt-2">
                 Novidades do Espaço
               </h2>
@@ -382,15 +382,15 @@ export default function Home() {
             <h2 className="font-display text-2xl sm:text-3xl font-bold text-cosmos mb-3">
               Primeira Compra?
             </h2>
-            <p className="text-cosmos/50 mb-6">
-              Use o cupom abaixo e ganhe <span className="text-kosmo font-bold">10% OFF</span> em qualquer produto!
+            <p className="text-cosmos/60 mb-6">
+              Use o cupom abaixo e ganhe <span className="text-kosmo-600 font-bold">10% OFF</span> em qualquer produto!
             </p>
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-kosmo/5 border-2 border-dashed border-kosmo/20">
               <span className="font-display font-bold text-2xl text-kosmo tracking-wider">
                 KOSMO10
               </span>
             </div>
-            <p className="text-xs text-cosmos/40 mt-4">
+            <p className="text-xs text-cosmos/60 mt-4">
               Válido para primeira compra. Não acumula com outras promoções.
             </p>
           </Reveal>

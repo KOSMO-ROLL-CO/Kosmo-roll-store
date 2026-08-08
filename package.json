@@ -19,7 +19,9 @@
     "test:visual": "playwright test e2e/visual-regression.spec.ts",
     "test:perf": "playwright test e2e/performance-web-vitals.spec.ts --project=chromium",
     "test:stress": "playwright test e2e/stress-memory.spec.ts --project=chromium",
-    "test:images": "playwright test e2e/product-images.spec.ts"
+    "test:images": "playwright test e2e/product-images.spec.ts",
+    "test:smoke": "playwright test --config=playwright.prod.config.ts",
+    "test:responsive": "playwright test e2e/responsive-layout.spec.ts --project=chromium --reporter=list"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

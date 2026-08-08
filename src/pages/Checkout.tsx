@@ -403,14 +403,14 @@ export default function Checkout() {
           <h1 className="font-display text-3xl font-bold text-cosmos mb-3">
             Faça login para comprar
           </h1>
-          <p className="text-cosmos/50 mb-8">
+          <p className="text-cosmos/60 mb-8">
             Para garantir seu cupom de primeira compra e acompanhar seus pedidos,
             é preciso ter uma conta. Leva menos de 1 minuto.
           </p>
           <div className="space-y-3">
             <Link
               to="/login?redirect=/checkout"
-              className="w-full py-4 bg-kosmo text-white rounded-full font-semibold text-sm block hover:bg-kosmo-dark transition-colors shadow-lg shadow-kosmo/25"
+              className="w-full py-4 bg-kosmo-600 text-white rounded-full font-semibold text-sm block hover:bg-kosmo-700 transition-colors shadow-lg shadow-kosmo/25"
             >
               Fazer Login
             </Link>
@@ -422,7 +422,7 @@ export default function Checkout() {
             </Link>
             <Link
               to="/catalogo"
-              className="w-full py-3 text-cosmos/50 text-sm font-medium block hover:text-kosmo transition-colors"
+              className="w-full py-3 text-cosmos/60 text-sm font-medium block hover:text-kosmo transition-colors"
             >
               Continuar comprando
             </Link>
