@@ -35,7 +35,7 @@ function PageLoader() {
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
         <div className="w-10 h-10 rounded-full border-4 border-kosmo/20 border-t-kosmo animate-spin" />
-        <span className="text-sm text-cosmos/40">Carregando...</span>
+        <span className="text-sm text-cosmos/60">Carregando...</span>
       </div>
     </div>
   )

@@ -21,7 +21,7 @@
     "test:stress": "playwright test e2e/stress-memory.spec.ts --project=chromium",
     "test:images": "playwright test e2e/product-images.spec.ts",
     "test:smoke": "playwright test --config=playwright.prod.config.ts",
-    "test:responsive": "playwright test e2e/responsive-layout.spec.ts --project=chromium --workers=4 --reporter=list"
+    "test:responsive": "playwright test e2e/responsive-layout.spec.ts --project=chromium --workers=2 --reporter=list"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

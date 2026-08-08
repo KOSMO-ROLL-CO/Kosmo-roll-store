@@ -104,7 +104,7 @@ function LimitedEditionCard({ product, index }: { product: Product; index: numbe
 
         <div className="flex items-center justify-between text-[10px] text-white/50">
           <span>Edição #{product.edition.current}/{product.edition.total}</span>
-          <CountdownTimer endDate={product.saleEndsAt} size="sm" />
+          <CountdownTimer endDate={product.saleEndsAt} size="sm" variant="dark" />
         </div>
       </Link>
     </motion.div>

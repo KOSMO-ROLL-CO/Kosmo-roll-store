@@ -442,7 +442,7 @@ export default function ProductDetail() {
                   </div>
                   <div className="flex items-center gap-2 text-xs text-cosmos/60">
                     <span className="font-semibold shrink-0">A venda por mais:</span>
-                    <CountdownTimer endDate={product.saleEndsAt} size="md" />
+                    <CountdownTimer endDate={product.saleEndsAt} size="md" variant="light" />
                   </div>
                   <p className="text-xs text-cosmos/50">
                     ⚡ Quando esgota, acabou. Cada peça vem numerada em laser.
