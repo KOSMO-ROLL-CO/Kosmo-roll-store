@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Testes de Regressão Visual (Visual Snapshots)', () => {
-  test.beforeEach(async ({ browserName }) => {
-    test.skip(browserName !== 'chromium', 'Snapshots de regressão visual apenas no Chromium')
+  test.beforeEach(async ({}, testInfo) => {
+    test.skip(
+      testInfo.project.name !== 'chromium',
+      'Snapshots de regressão visual apenas no projeto Chromium desktop'
+    )
   })
 
   test('snapshot visual da Home', async ({ page }) => {

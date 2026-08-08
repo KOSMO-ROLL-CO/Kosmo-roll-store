@@ -14,11 +14,21 @@ test.describe('Carregamento de Imagens de Produtos no Navegador (E2E)', () => {
     await page.goto('/catalogo')
     await page.waitForLoadState('networkidle')
 
+    // Força o carregamento das imagens lazy (abaixo da dobra) rolando a página
+    await page.evaluate(async () => {
+      const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+      for (let y = 0; y <= document.body.scrollHeight; y += window.innerHeight) {
+        window.scrollTo(0, y)
+        await delay(100)
+      }
+      window.scrollTo(0, 0)
+    })
+
     // Aguarda todas as imagens do catálogo terminarem de carregar
     await page.waitForFunction(() => {
       const imgs = document.querySelectorAll<HTMLImageElement>('img[src*="/products/"]')
       return Array.from(imgs).every((img) => img.complete)
-    }, { timeout: 10000 })
+    }, { timeout: 15000 })
 
     expect(failedImages, `Imagens com 404: ${failedImages.join(', ')}`).toEqual([])
   })
