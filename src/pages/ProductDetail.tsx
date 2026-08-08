@@ -142,8 +142,17 @@ export default function ProductDetail() {
                 <img
                   src={currentImages[activeImage]}
                   alt={product.name}
+                  loading="eager"
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={() => setImageError(true)}
+                  onError={(e) => {
+                    // Tentar fallback para a primeira imagem principal antes do placeholder
+                    const fallback = product.images[0]
+                    if (fallback && e.currentTarget.src !== window.location.origin + fallback) {
+                      e.currentTarget.src = fallback
+                    } else {
+                      setImageError(true)
+                    }
+                  }}
                 />
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">

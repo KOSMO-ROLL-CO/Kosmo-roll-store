@@ -58,12 +58,14 @@ export default function Footer() {
                 href="https://instagram.com/kosmoroll.co"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Instagram da Kosmo Roll"
                 className="group w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kosmo hover:text-white hover:scale-110 hover:rotate-6 transition-all duration-300"
               >
                 <Instagram size={18} className="group-hover:scale-110 transition-transform duration-300" />
               </a>
               <a
                 href="mailto:contato@kosmoroll.co"
+                aria-label="Enviar e-mail para a Kosmo Roll"
                 className="group w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-kosmo hover:text-white hover:scale-110 hover:-rotate-6 transition-all duration-300"
               >
                 <Mail size={18} className="group-hover:scale-110 transition-transform duration-300" />

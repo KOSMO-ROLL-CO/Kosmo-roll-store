@@ -1,32 +1,44 @@
-# React + TypeScript + Vite
+# 🪐 Kosmo Roll Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Plataforma de e-commerce e catálogo oficial da **Kosmo Roll** desenvolvida com React, TypeScript, TailwindCSS e Vite.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🧪 Suíte de Testes Avançada (11 Camadas de Qualidade)
 
-## React Compiler
+Este projeto possui uma infraestrutura completa de testes automatizados e integração contínua (CI/CD):
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Guia Completo de Testes e Expansão de Features**: Veja o arquivo [TESTING_GUIDE.md](./TESTING_GUIDE.md) para entender como os testes funcionam e o que adicionar ao criar novas funcionalidades.
+- **Matriz de Testes Exploratórios**: Consulte o arquivo [EXPLORATORY_TESTING.md](./EXPLORATORY_TESTING.md) para visualizar os Charters de testes manuais e simulações de Monkey/Fuzz Testing.
 
-## Expanding the Oxlint configuration
+### Comandos de Teste
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+| Comando | Descrição |
+| :--- | :--- |
+| `npm run test` | Executa testes unitários, integração e resiliência MSW (Vitest) |
+| `npm run test:coverage` | Gera relatório de cobertura de código (V8 / HTML em `./coverage`) |
+| `npm run test:a11y` | Executa testes de acessibilidade automatizada WCAG 2.1 AA (`@axe-core/playwright`) |
+| `npm run test:visual` | Executa testes de regressão visual comparando snapshots de tela pixel-por-pixel |
+| `npm run test:perf` | Executa medição de performance LCP e estabilidade de nós no DOM |
+| `npm run test:stress` | Executa testes de estresse de renderização e vazamento de memória |
+| `npm run test:security` | Executa testes de segurança (XSS, SAST e sanitização) |
+| `npm run test:e2e` | Executa os testes de ponta a ponta em navegadores reais com Playwright |
+| `npm run test:exploratory` | Executa o teste exploratório automatizado (Fuzzing) |
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+---
+
+## 🚀 Desenvolvimento Local
+
+```bash
+# Instalar dependências
+npm install
+
+# Rodar servidor de desenvolvimento
+npm run dev
+
+# Rodar linter
+npm run lint
+
+# Compilar para produção
+npm run build
 ```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
