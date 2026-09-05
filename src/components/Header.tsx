@@ -12,6 +12,7 @@ import { assetUrl } from '../utils/asset';
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/catalogo', label: 'Catálogo' },
+  { to: '/quiz', label: 'Descubra seu estilo' },
   { to: '/edicoes', label: 'Edições Limitadas' },
   { to: '/sobre', label: 'Sobre' },
   { to: '/contato', label: 'Contato' },
@@ -85,7 +86,6 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
               <Logo size="xl" />
@@ -101,7 +101,6 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
@@ -118,7 +117,6 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Right side */}
           <div className="flex items-center gap-2">
             <a
               href="https://instagram.com/kosmoroll.co"
@@ -142,7 +140,6 @@ export default function Header() {
               <Search size={18} />
             </button>
 
-            {/* Auth buttons */}
             {isAuthenticated ? (
               <div className="hidden sm:flex items-center gap-2">
                 <Link
@@ -199,7 +196,6 @@ export default function Header() {
               </AnimatePresence>
             </button>
 
-            {/* Mobile menu toggle */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
@@ -211,7 +207,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Search bar */}
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div
@@ -244,7 +239,6 @@ export default function Header() {
                 )}
               </form>
 
-              {/* Autocomplete dropdown */}
               <AnimatePresence>
                 {isSearchFocused && searchQuery.trim().length >= 2 && (
                   <motion.div
@@ -302,7 +296,6 @@ export default function Header() {
         )}
       </AnimatePresence>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
