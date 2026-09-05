@@ -18,6 +18,7 @@ const Validar = lazy(() => import('./pages/Validar'))
 const ValePresente = lazy(() => import('./pages/ValePresente'))
 const Cupons = lazy(() => import('./pages/Cupons'))
 const Esgotados = lazy(() => import('./pages/Esgotados'))
+const Quiz = lazy(() => import('./pages/Quiz'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const EmBreve = lazy(() => import('./pages/EmBreve'))
 const Admin = lazy(() => import('./pages/Admin'))
@@ -62,6 +63,7 @@ function App() {
                 <Route path="/catalogo" element={<Catalog />} />
                 <Route path="/produto/:slug" element={<ProductDetail />} />
                 <Route path="/edicoes" element={<Edicoes />} />
+                <Route path="/quiz" element={<Quiz />} />
                 <Route path="/sobre" element={<Sobre />} />
                 <Route path="/contato" element={<Contato />} />
                 <Route path="/checkout" element={<Checkout />} />
