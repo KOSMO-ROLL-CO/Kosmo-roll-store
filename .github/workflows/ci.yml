@@ -62,3 +62,37 @@ jobs:
 
       - name: Build application
         run: npm run build
+
+  e2e:
+    name: E2E Smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run critical smoke flows
+        run: npx playwright test e2e/smoke-critical.spec.ts --project=chromium --project="Mobile Chrome"
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-smoke-report
+          path: playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
