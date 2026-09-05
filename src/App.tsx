@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import Layout from './components/Layout'
+import { ThemeProvider } from './context/ThemeContext'
 
 const Home = lazy(() => import('./pages/Home'))
 const Catalog = lazy(() => import('./pages/Catalog'))
@@ -19,72 +20,66 @@ const ValePresente = lazy(() => import('./pages/ValePresente'))
 const Cupons = lazy(() => import('./pages/Cupons'))
 const Esgotados = lazy(() => import('./pages/Esgotados'))
 const Quiz = lazy(() => import('./pages/Quiz'))
+const SizeGuide = lazy(() => import('./pages/SizeGuide'))
+const Referral = lazy(() => import('./pages/Referral'))
+const Diario = lazy(() => import('./pages/Diario'))
+const MakingOf = lazy(() => import('./pages/MakingOf'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const EmBreve = lazy(() => import('./pages/EmBreve'))
 const Admin = lazy(() => import('./pages/Admin'))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
+  useEffect(() => { window.scrollTo(0, 0) }, [pathname])
   return null
 }
 
 function PageLoader() {
-  return (
-    <div className="min-h-[60vh] flex items-center justify-center">
-      <div className="flex flex-col items-center gap-3">
-        <div className="w-10 h-10 rounded-full border-4 border-kosmo/20 border-t-kosmo animate-spin" />
-        <span className="text-sm text-cosmos/60">Carregando...</span>
-      </div>
-    </div>
-  )
+  return <div className="min-h-[60vh] flex items-center justify-center"><div className="flex flex-col items-center gap-3"><div className="w-10 h-10 rounded-full border-4 border-kosmo/20 border-t-kosmo animate-spin" /><span className="text-sm text-cosmos/60">Carregando...</span></div></div>
+}
+
+function AppRoutes() {
+  const location = useLocation()
+  return <>
+    <ScrollToTop />
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div key={location.pathname} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.22, ease: 'easeOut' }}>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/catalogo" element={<Catalog />} />
+              <Route path="/produto/:slug" element={<ProductDetail />} />
+              <Route path="/edicoes" element={<Edicoes />} />
+              <Route path="/quiz" element={<Quiz />} />
+              <Route path="/guia-de-tamanhos" element={<SizeGuide />} />
+              <Route path="/indique" element={<Referral />} />
+              <Route path="/diario-de-bordo" element={<Diario />} />
+              <Route path="/making-of" element={<MakingOf />} />
+              <Route path="/sobre" element={<Sobre />} />
+              <Route path="/contato" element={<Contato />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Register />} />
+              <Route path="/minha-conta" element={<MyAccount />} />
+              <Route path="/vale-presente" element={<ValePresente />} />
+              <Route path="/cupons" element={<Cupons />} />
+              <Route path="/esgotados" element={<Esgotados />} />
+              <Route path="/certificado/:slug" element={<Certificate />} />
+              <Route path="/validar" element={<Validar />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+            <Route path="/em-breve" element={<EmBreve />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </Suspense>
+      </motion.div>
+    </AnimatePresence>
+  </>
 }
 
 function App() {
-  const location = useLocation()
-
-  return (
-    <>
-      <ScrollToTop />
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={location.pathname}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
-          transition={{ duration: 0.22, ease: 'easeOut' }}
-        >
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/catalogo" element={<Catalog />} />
-                <Route path="/produto/:slug" element={<ProductDetail />} />
-                <Route path="/edicoes" element={<Edicoes />} />
-                <Route path="/quiz" element={<Quiz />} />
-                <Route path="/sobre" element={<Sobre />} />
-                <Route path="/contato" element={<Contato />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/cadastro" element={<Register />} />
-                <Route path="/minha-conta" element={<MyAccount />} />
-                <Route path="/vale-presente" element={<ValePresente />} />
-                <Route path="/cupons" element={<Cupons />} />
-                <Route path="/esgotados" element={<Esgotados />} />
-                <Route path="/certificado/:slug" element={<Certificate />} />
-                <Route path="/validar" element={<Validar />} />
-                <Route path="*" element={<NotFound />} />
-              </Route>
-              <Route path="/em-breve" element={<EmBreve />} />
-              <Route path="/admin" element={<Admin />} />
-            </Routes>
-          </Suspense>
-        </motion.div>
-      </AnimatePresence>
-    </>
-  )
+  return <ThemeProvider><AppRoutes /></ThemeProvider>
 }
 
 export default App
