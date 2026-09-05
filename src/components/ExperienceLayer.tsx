@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, X } from 'lucide-react'
+import { Moon, Sparkles, Sun, X } from 'lucide-react'
 import { useCatalog } from '../store/catalogStore'
+import { useTheme } from '../context/ThemeContext'
 
 export default function ExperienceLayer() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const location = useLocation()
   const products = useCatalog()
+  const { theme, toggleTheme } = useTheme()
   const [cursor, setCursor] = useState({ x: -100, y: -100, visible: false })
   const [notice, setNotice] = useState<string | null>(null)
 
@@ -17,9 +19,7 @@ export default function ExperienceLayer() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const stars = Array.from({ length: 70 }, () => ({
-      x: Math.random(), y: Math.random(), r: Math.random() * 1.5 + 0.3, a: Math.random(), s: Math.random() * 0.008 + 0.002,
-    }))
+    const stars = Array.from({ length: 70 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.5 + 0.3, a: Math.random(), s: Math.random() * 0.008 + 0.002 }))
     let frame = 0
     let raf = 0
     const resize = () => { canvas.width = window.innerWidth * devicePixelRatio; canvas.height = window.innerHeight * devicePixelRatio; ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0) }
@@ -27,8 +27,7 @@ export default function ExperienceLayer() {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
       stars.forEach((star) => {
         star.a += reduce ? 0 : star.s
-        const alpha = 0.15 + (Math.sin(star.a + star.x * 8) + 1) * 0.2
-        ctx.globalAlpha = alpha
+        ctx.globalAlpha = 0.12 + (Math.sin(star.a + star.x * 8) + 1) * 0.16
         ctx.beginPath(); ctx.arc(star.x * window.innerWidth, star.y * window.innerHeight, star.r, 0, Math.PI * 2); ctx.fillStyle = '#FF0082'; ctx.fill()
       })
       frame += 1
@@ -58,6 +57,9 @@ export default function ExperienceLayer() {
   return <>
     <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 opacity-60" />
     <motion.div aria-hidden="true" className="kosmo-cursor hidden lg:block" animate={{ x: cursor.x - 14, y: cursor.y - 14, opacity: cursor.visible ? 1 : 0 }} transition={{ type: 'spring', stiffness: 700, damping: 35 }} />
+    <button onClick={toggleTheme} aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'} title="Alternar tema" className="fixed bottom-5 left-5 z-[60] w-11 h-11 rounded-full border border-kosmo/20 bg-white/90 dark:bg-cosmos-light/90 text-cosmos dark:text-white backdrop-blur-xl shadow-xl flex items-center justify-center hover:scale-105 transition-transform">
+      {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+    </button>
     <AnimatePresence>
       {notice && <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="fixed top-24 right-4 z-[60] max-w-sm rounded-2xl border border-kosmo/20 bg-white/95 dark:bg-cosmos-light/95 backdrop-blur-xl p-4 shadow-2xl shadow-kosmo/10">
         <div className="flex items-start gap-3"><Sparkles className="mt-0.5 shrink-0 text-kosmo" size={18} /><p className="text-sm font-medium text-cosmos dark:text-white pr-2">{notice}</p><button onClick={() => setNotice(null)} aria-label="Fechar aviso" className="text-cosmos/40 hover:text-kosmo"><X size={16} /></button></div>
