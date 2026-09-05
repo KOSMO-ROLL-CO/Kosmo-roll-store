@@ -15,7 +15,7 @@
     "test:e2e": "playwright test e2e/checkout-flow.spec.ts e2e/exploratory.spec.ts e2e/navigation-responsive.spec.ts e2e/product-images.spec.ts e2e/visual-regression.spec.ts",
     "test:security": "vitest run src/tests/security",
     "test:exploratory": "playwright test e2e/exploratory.spec.ts",
-    "test:a11y": "playwright test e2e/accessibility.spec.ts --project=chromium",
+    "test:a11y": "playwright test e2e/accessibility.spec.ts e2e/accessibility-critical.spec.ts --project=chromium",
     "test:visual": "playwright test e2e/visual-regression.spec.ts",
     "test:perf": "playwright test e2e/performance-web-vitals.spec.ts --project=chromium",
     "test:stress": "playwright test e2e/stress-memory.spec.ts --project=chromium",
